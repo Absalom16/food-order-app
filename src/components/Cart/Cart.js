@@ -28,7 +28,7 @@ const Cart = (props) => {
 
   const submitOrderHandler = (userData) => {
     setIsSubmitting(true);
-    fetch("http://localhost:8083/order", {
+    fetch("https://food-order-app-server.onrender.com/order", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
