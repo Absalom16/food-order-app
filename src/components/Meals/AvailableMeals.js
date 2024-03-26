@@ -12,7 +12,7 @@ const AvailableMeals = () => {
   useEffect(() => {
     const fetchMeals = async () => {
       const response = await fetch(
-        "https://react-http-test-481a5-default-rtdb.firebaseio.com/meals.json"
+        "https://food-order-app-server.onrender.com/availableFood"
       );
 
       if (!response.ok) {
@@ -23,14 +23,9 @@ const AvailableMeals = () => {
 
       const loadedMeals = [];
 
-      for (const key in responseData) {
-        loadedMeals.push({
-          id: key,
-          name: responseData[key].name,
-          description: responseData[key].description,
-          price: responseData[key].price,
-        });
-      }
+      responseData.forEach((el) => {
+        loadedMeals.push(el);
+      });
 
       setMeals(loadedMeals);
       setIsLoading(false);

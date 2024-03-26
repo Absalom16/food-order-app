@@ -26,21 +26,22 @@ const Cart = (props) => {
     setIsCheckout(true);
   };
 
-  const submitOrderHandler = async (userData) => {
+  const submitOrderHandler = (userData) => {
     setIsSubmitting(true);
-    await fetch(
-      "https://react-http-test-481a5-default-rtdb.firebaseio.com/orders.json",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          user: userData,
-          orderedItems: CartCtx.items,
-        }),
-      }
-    );
-    setIsSubmitting(false);
-    setDidSubmit(true);
-    CartCtx.clearCart();
+    fetch("http://localhost:8083/order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user: userData,
+        orderedItems: CartCtx.items,
+      }),
+    }).then(() => {
+      setIsSubmitting(false);
+      setDidSubmit(true);
+      CartCtx.clearCart();
+    });
   };
 
   const cartItems = (
